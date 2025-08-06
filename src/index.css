@@ -2,39 +2,54 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+/* Barron Royce Brand Design System
+Royal Blue: #1A237E - Primary brand color
+Gold: Metallic accents for CTAs
+Dark: For contrast and text
 All colors MUST be HSL.
 */
 
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --foreground: 220 13% 18%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 220 13% 18%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 220 13% 18%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Brand Colors - Royal Blue Primary */
+    --primary: 239 82% 31%;
+    --primary-foreground: 0 0% 100%;
+    --primary-light: 239 82% 45%;
+    --primary-dark: 239 82% 20%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Gold/Metallic Accents */
+    --accent: 45 100% 51%;
+    --accent-foreground: 220 13% 18%;
+    --accent-light: 45 100% 65%;
+    --accent-dark: 45 100% 40%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --secondary: 220 13% 95%;
+    --secondary-foreground: 220 13% 18%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --muted: 220 13% 95%;
+    --muted-foreground: 220 9% 46%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 239 82% 31%;
+
+    /* Custom Brand Variables */
+    --gradient-hero: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-light)));
+    --gradient-accent: linear-gradient(135deg, hsl(var(--accent)), hsl(var(--accent-light)));
+    --shadow-brand: 0 10px 30px -10px hsl(var(--primary) / 0.3);
+    --shadow-glow: 0 0 40px hsl(var(--accent) / 0.4);
 
     --radius: 0.5rem;
 
@@ -100,6 +115,58 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
+  }
+}
+
+@layer utilities {
+  /* Hero Animation */
+  .hero-animation {
+    background: linear-gradient(45deg, 
+      hsl(var(--primary) / 0.1), 
+      hsl(var(--accent) / 0.1), 
+      hsl(var(--primary) / 0.1)
+    );
+    background-size: 400% 400%;
+    animation: gradient-flow 8s ease-in-out infinite;
+  }
+
+  @keyframes gradient-flow {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  /* Smooth scroll */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Brand button styles */
+  .btn-brand {
+    background: hsl(var(--gradient-accent));
+    box-shadow: var(--shadow-glow);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .btn-brand:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-glow), 0 20px 40px -10px hsl(var(--accent) / 0.3);
+  }
+
+  /* Navigation sticky */
+  .nav-sticky {
+    backdrop-filter: blur(10px);
+    background: hsl(var(--background) / 0.95);
+    border-bottom: 1px solid hsl(var(--border));
+  }
+
+  /* Card hover effects */
+  .card-hover {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .card-hover:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-brand);
   }
 }
